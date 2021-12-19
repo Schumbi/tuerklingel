@@ -1,0 +1,42 @@
+esphome:
+  name: tuerklingel
+  platform: ESP8266
+  board: d1_mini
+  name_add_mac_suffix: False
+
+wifi:
+  ssid: "someessis"
+  password: "somesecret"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "tuerklingel Fallback Hotspot"
+    password: "l8gsEEqCzHfT"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+switch:
+  - platform: gpio
+    pin: TX
+    id: relais_output
+    name: "Klingel aktiv"
+    icon: "mdi:bell-check-outline"
+    restore_mode: RESTORE_DEFAULT_ON
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: D6
+      mode:
+        input: True
+        pullup: False
+    name: "Klingelsignal"
+    device_class: "connectivity"
